@@ -12,6 +12,8 @@ class _LogingPageState extends State<LogingPage> {
   //ປະກາດຕົວປ່ຽນ
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  int count = 0;
+
   @override
   //ຄວບຄຸມເທັກ
   void initState() {
@@ -43,7 +45,21 @@ class _LogingPageState extends State<LogingPage> {
                   SizedBox(
                     height: 32,
                   ),
-                  ..._buildButton()
+                  ..._buildButton(),
+                  Row(
+                    children: [
+                      Text("Debug:  $count"),
+                      //separation of concern
+                      IconButton(
+                        onPressed: _handleClickAdd,
+                        icon: Icon(Icons.add),
+                      ),
+                      IconButton(
+                        onPressed: _handleClickRemove,
+                        icon: Icon(Icons.remove),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),
@@ -51,17 +67,6 @@ class _LogingPageState extends State<LogingPage> {
         ),
       ),
     );
-  }
-
-  void _handleClickLogin() {
-    // print(
-    //     "CMDev:Login with (${_usernameController.text}),(${_passwordController.text}) ");
-    Navigator.pushNamed(context, AppRoute.home);
-  }
-
-  void _handleClickReset() {
-    _usernameController.text = "";
-    _passwordController.text = "";
   }
 
   _buildTextFields() {
@@ -111,5 +116,28 @@ class _LogingPageState extends State<LogingPage> {
 
   void _handleClickRegister() {
     Navigator.pushNamed(context, AppRoute.register);
+  }
+
+  void _handleClickLogin() {
+    // print(
+    //     "CMDev:Login with (${_usernameController.text}),(${_passwordController.text}) ");
+    Navigator.pushNamed(context, AppRoute.home);
+  }
+
+  void _handleClickReset() {
+    _usernameController.text = "";
+    _passwordController.text = "";
+  }
+
+  void _handleClickRemove() {
+    setState(() {
+      count--;
+    });
+  }
+
+  void _handleClickAdd() {
+    setState(() {
+      count++;
+    });
   }
 }

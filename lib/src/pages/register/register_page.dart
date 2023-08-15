@@ -8,7 +8,7 @@ class RegisterPage extends StatelessWidget {
     //fsc for tool tip flutter scaff
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Title'),
+        title: const Text('Register'),
       ),
       body: Container(
         width: double.infinity,
